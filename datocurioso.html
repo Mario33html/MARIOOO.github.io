@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datos Curiosos Aleatorios</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #curiosity {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    #btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <ul>
+        <li><a href="index.html">inicio</a></li>
+        <li><a href="contacto.html">contaco</a></li>
+        <li><a href="3enraya.html">3 en raya</a></li>
+        <li><a href="marioo.html">Marioo</a></li>
+        <li><a href="datocurioso.html">?</a></li>
+    </ul>
+    
+    
+    <h1>Datos Curiosos Aleatorios</h1>
+    <div id="curiosity">
+        <p id="curiosity-text">Presiona el botón para ver un dato curioso.</p>
+    </div>
+    <button id="btn">Mostrar Curiosidad</button>
+
+    <script>
+        // Función para obtener un dato curioso aleatorio de una API
+        async function obtenerDatoCurioso() {
+            try {
+                const respuesta = await fetch('https://uselessfacts.jsph.pl/random.json?language=en');
+                const datoCurioso = await respuesta.json();
+                return datoCurioso.text;
+            } catch (error) {
+                console.error('Error al obtener el dato curioso:', error);
+                return 'No se pudo obtener un dato curioso en este momento. Inténtalo de nuevo más tarde.';
+            }
+        }
+
+        // Función para mostrar el dato curioso en la página
+        async function mostrarDatoCurioso() {
+            const datoCurioso = await obtenerDatoCurioso();
+            document.getElementById('curiosity-text').textContent = datoCurioso;
+        }
+
+        // Event listener para el botón
+        document.getElementById('btn').addEventListener('click', mostrarDatoCurioso);
+    </script>
+</body>
+</html>

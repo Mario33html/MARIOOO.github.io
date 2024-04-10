@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marioo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: background-color 1s ease;
+    }
+    .search-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .search-container h1 {
+        font-size: 72px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .search-container h1 span:first-child {
+        color: #4285f4; /* azul */
+    }
+    .search-container h1 span:nth-child(2) {
+        color: #ea4335; /* rojo */
+    }
+    .search-container h1 span:nth-child(3) {
+        color: #ffba00; /* amarillo */
+    }
+    .search-container h1 span:nth-child(4) {
+        color: #4285f4; /* azul */
+    }
+    .search-container h1 span:nth-child(5) {
+        color: #34a853; /* verde */
+    }
+    .search-container h1 span:last-child {
+        color: #ea4335; /* rojo */
+    }
+    .search-container input[type="text"] {
+        width: 400px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #dfe1e5;
+        border-radius: 24px;
+        outline: none;
+        margin-right: 10px;
+    }
+    .search-container input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4285f4;
+        color: #fff;
+        border: none;
+        border-radius: 24px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-bottom: 10px;
+    }
+    .search-container input[type="submit"]:hover {
+        background-color: #357ae8;
+    }
+    .color-picker-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .color-picker {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 5px 0;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+    <ul>
+        <li><a href="index.html">inicio</a></li>
+        <li><a href="contacto.html">contaco</a></li>
+        <li><a href="3enraya.html">3 en raya</a></li>
+        <li><a href="marioo.html">Marioo</a></li>
+        <li><a href="datocurioso.html">?</a></li>
+    </ul>
+
+    <a href=""></a><div class="search-container">
+    <h1>
+        <span>M</span><span>a</span><span>r</span><span>i</span><span>o</span><span>o</span>
+    </h1>
+    <form id="searchForm" action="https://www.google.com/search" method="get" target="_blank">
+        <input type="text" name="q" placeholder="Buscar en Marioo">
+        <input type="submit" value="Buscar">
+    </form>
+    <form action="https://classroom.google.com/" method="get" target="_blank">
+        <input type="submit" value="Classroom">
+    </form>
+    <form action="https://scratch.mit.edu/" method="get" target="_blank">
+        <input type="submit" value="Scratch">
+    </form>
+    <form action="https://www.youtube.com/" method="get" target="_blank">
+        <input type="submit" value="YouTube">
+    </form>
+    <form action="https://chat.openai.com/" method="get" target="_blank">
+        <input type="submit" value="ChatGPT">
+    </form>
+    <form action="https://www.twitch.tv/" method="get" target="_blank">
+        <input type="submit" value="Twitch">
+    </form>
+    <form action="https://mail.google.com/" method="get" target="_blank">
+        <input type="submit" value="Gmail">
+    </form>
+    
+    
+    
+</div>
+<div class="color-picker-container">
+    <div class="color-picker" style="background-color: #FF6633;"></div>
+    <div class="color-picker" style="background-color: #FFB399;"></div>
+    <div class="color-picker" style="background-color: #FF33FF;"></div>
+    <div class="color-picker" style="background-color: #FFFF99;"></div>
+    <div class="color-picker" style="background-color: #00B3E6;"></div>
+    <div class="color-picker" style="background-color: #E6B333;"></div>
+    <div class="color-picker" style="background-color: #3366E6;"></div>
+    <div class="color-picker" style="background-color: #999966;"></div>
+    <div class="color-picker" style="background-color: #99FF99;"></div>
+    <div class="color-picker" style="background-color: #B34D4D;"></div>
+    <div class="color-picker" style="background-color: #FF9933;"></div>
+    <div class="color-picker" style="background-color: #CC33FF;"></div>
+    <div class="color-picker" style="background-color: #FFFF66;"></div>
+    <div class="color-picker" style="background-color: #66FF99;"></div>
+</div>
+<script>
+    const colorPickers = document.querySelectorAll('.color-picker');
+    colorPickers.forEach(function(colorPicker) {
+        colorPicker.addEventListener('click', function() {
+            const color = this.style.backgroundColor;
+            document.body.style.backgroundColor = color;
+        });
+    });
+</script>
+</body>
+</html>

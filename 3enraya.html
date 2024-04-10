@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 en Raya</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #009688;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    h1 {
+        text-align: center;
+        color: #fff;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        gap: 2px;
+        width: 306px;
+        margin-top: 20px;
+        border: 2px solid #fff;
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .cell {
+        border: 1px solid #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    input[type="text"] {
+        display: block;
+        margin: 10px auto;
+        padding: 5px;
+        font-size: 1em;
+        width: 80%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        display: block;
+        margin: 10px auto;
+        padding: 8px 20px;
+        font-size: 1em;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .winner-animation {
+        animation: winner 1s ease;
+    }
+    @keyframes winner {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+    <ul>
+        <li><a href="index.html">inicio</a></li>
+        <li><a href="contacto.html">contaco</a></li>
+        <li><a href="3enraya.html">3 en raya</a></li>
+        <li><a href="marioo.html">Marioo</a></li>
+        <li><a href="datocurioso.html">?</a></li>
+    </ul>
+
+
+    <h1>3 en Raya</h1>
+<form id="player-form">
+    <label for="player1" style="color: #fff;">Jugador 1:</label>
+    <input type="text" id="player1" placeholder="Nombre del Jugador 1" required>
+    <label for="player2" style="color: #fff;">Jugador 2:</label>
+    <input type="text" id="player2" placeholder="Nombre del Jugador 2" required>
+    <button type="submit">Empezar</button>
+</form>
+<div class="container"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.querySelector('.container');
+        const cells = [];
+        let currentPlayer = '💎';
+        let winner = false;
+        let player1Name = '';
+        let player2Name = '';
+
+        document.getElementById('player-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            player1Name = document.getElementById('player1').value;
+            player2Name = document.getElementById('player2').value;
+            document.getElementById('player1').disabled = true;
+            document.getElementById('player2').disabled = true;
+            document.querySelector('button[type="submit"]').disabled = true;
+            document.getElementById('reset-btn').style.display = 'block';
+        });
+
+        // Initialize game board
+        for (let i = 0; i < 9; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.index = i;
+            cell.addEventListener('click', () => makeMove(i));
+            cells.push(cell);
+            container.appendChild(cell);
+        }
+
+        // Function to handle a move
+        function makeMove(index) {
+            if (!cells[index].textContent && !winner) {
+                cells[index].textContent = currentPlayer;
+                checkWinner();
+                currentPlayer = currentPlayer === '💎' ? '👽' : '💎';
+            }
+        }
+
+        // Function to check for a winner
+        function checkWinner() {
+            const winningCombos = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6]             // Diagonals
+            ];
+
+            for (const combo of winningCombos) {
+                const [a, b, c] = combo;
+                if (cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent) {
+                    cells[a].classList.add('winner-animation');
+                    cells[b].classList.add('winner-animation');
+                    cells[c].classList.add('winner-animation');
+                    winner = true;
+                    const winnerName = currentPlayer === '💎' ? player1Name : player2Name;
+                    setTimeout(() => {
+                        alert(`${winnerName} ha ganado!`);
+                    }, 1000);
+                    return;
+                }
+            }
+
+            // Check for draw
+            if (!cells.some(cell => !cell.textContent)) {
+                setTimeout(() => {
+                    alert("¡Empate!");
+                }, 1000);
+                winner = true;
+            }
+        }
+    });
+</script>
+</body>
+</html>
